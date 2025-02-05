@@ -72,13 +72,20 @@
         color: #333;
       }
       .video-container {
-        margin-top: 20px;
-        padding-top: 10px;
-      }
-      .video-container iframe {
+        position: relative;
         width: 100%;
-        height: 315px;
+        padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+        height: 0;
+        overflow: hidden;
         border-radius: 8px;
+      }
+
+      .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
       }
       .footer {
         background-color: #333;
@@ -170,7 +177,7 @@
     </div>
 
     <div class="footer">
-      <p>&copy; 2024 Industrias Dimar. Todos los derechos reservados.</p>
+      <p>&copy; 2025 Industrias Dimar. Todos los derechos reservados.</p>
     </div>
 
     <button
@@ -186,21 +193,83 @@
       const sections = [
         {
           title: "Sección 1: Introducción",
+
           description:
-            "En esta sección, aprenderemos los conceptos básicos sobre HTML, cómo estructurar una página web y las etiquetas principales.",
-          videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+            "En esta sección, aprenderemos a navegar por la aplicación y conoceremos sus funciones principales para el manejo de procesos agroindustriales.",
+          videoUrl:
+            "https://drive.google.com/file/d/1jhHag4uXf9JoXUJkvG7Ul63npEeJkfSV/preview",
         },
         {
-          title: "Sección 2: CSS Básico",
+          title: "Sección 2: Autenticación",
+
           description:
-            "Aquí veremos cómo darle estilo a nuestras páginas web utilizando CSS, incluyendo cómo trabajar con colores, márgenes y fuentes.",
-          videoUrl: "https://www.youtube.com/embed/1Rs2ND1ryYc",
+            "En esta sección, aprenderemos como acceder de manera segura a la aplicación para comenzar a gestionar los procesos agroindustriales.",
+          videoUrl:
+            "https://drive.google.com/file/d/1ht0KQMzkRcg4AAUrxmkdTQOvYmdRKu3r/preview",
         },
         {
-          title: "Sección 3: JavaScript para Principiantes",
+          title: "Sección 3: Unidades de medida",
+
           description:
-            "En esta sección, exploraremos los fundamentos de JavaScript, cómo hacer que nuestra página interactúe con el usuario y cómo manipular elementos del DOM.",
-          videoUrl: "https://www.youtube.com/embed/W6NZfCO5SIk",
+            "Veremos cómo configurar y usar las unidades de medida necesarias para gestionar los ingredientes y productos en los procesos agroindustriales.",
+          videoUrl:
+            "https://drive.google.com/file/d/1cQ4xFkaKfSDA5Azr5Iach4vqK8S5zwK1/preview",
+        },
+        {
+          title: "Sección 4: Insumos",
+
+          description:
+            "En esta sección, aprenderemos cómo gestionar los insumos y materias primas necesarios para los procesos de producción en la aplicación.",
+          videoUrl:
+            "https://drive.google.com/file/d/1TLr50y-woWVYUK4tq33gmCtwMfGZP761/preview",
+        },
+        {
+          title: "Sección 5: Productos",
+
+          description:
+            "Veremos cómo registrar, actualizar y gestionar los productos finales producidos en los procesos agroindustriales.",
+          videoUrl:
+            "https://drive.google.com/file/d/1_4DqDy75W6EpqZDI3ciwbCGXkH99Fs5D/preview",
+        },
+        {
+          title: "Sección 6: Recetas",
+
+          description:
+            "Aprenderemos a definir y gestionar las recetas necesarias para la producción de los productos agroindustriales.",
+          videoUrl:
+            "https://drive.google.com/file/d/1WUNOeOtGZRcgWNX1-jQS_4wBP-QasSaq/preview",
+        },
+        {
+          title: "Sección 7: Terceros",
+
+          description:
+            "En esta sección, aprenderemos a gestionar los proveedores externos y su relación con los procesos dentro de la aplicación.",
+          videoUrl:
+            "https://drive.google.com/file/d/19LJAMuEqkoupOLGurc1YSM8jjTD7mdMR/preview",
+        },
+        {
+          title: "Sección 8: Compra de insumos",
+
+          description:
+            "Veremos cómo realizar la compra de insumos dentro de la aplicación para abastecer las necesidades de producción.",
+          videoUrl:
+            "https://drive.google.com/file/d/1dky5hgP1UJXtA6if_2zidLjrVg2TUUwG/preview",
+        },
+        {
+          title: "Sección 9: Producción",
+
+          description:
+            "Aprenderemos a utilizar la aplicación para hacer el seguimiento y monitoreo de las etapas de producción en los procesos agroindustriales.",
+          videoUrl:
+            "https://drive.google.com/file/d/1ptOhkmMJcU822O_qpvLIm_LMqMcFmbAW/preview",
+        },
+        {
+          title: "Sección 10: Venta de productos",
+
+          description:
+            "En esta sección, aprenderemos cómo gestionar la venta y distribución de los productos terminados a través de la aplicación.",
+          videoUrl:
+            "https://drive.google.com/file/d/1TZOi_zjPlFQZNV6TiFznDIDTY_fIkpSo/preview",
         },
       ];
 
@@ -222,8 +291,7 @@
               <iframe
                 src="${section.videoUrl}"
                 frameborder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
+                allow="autoplay"
               ></iframe>
             </div>
           </div>
@@ -241,14 +309,6 @@
           content.style.display = "block";
           closeButton.style.display = "block"; // Mostrar el botón flotante cuando se abre una sección
         }
-      }
-
-      function closeSection(event, button) {
-        event.stopPropagation(); // Evitar que el clic en el botón "X" cierre la sección automáticamente.
-        const section = button.closest(".section");
-        const content = section.querySelector(".section-content");
-        content.style.display = "none";
-        document.getElementById("closeAllButton").style.display = "none"; // Ocultar el botón flotante si no hay secciones abiertas.
       }
 
       function closeAllSections() {
