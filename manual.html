@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tutorial Interactivo - Industrias Dimar</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f4f8;
+      }
+      .header {
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      .header svg {
+        width: 150px; /* Reducción del tamaño del logo */
+        height: 150px; /* Puedes ajustar ambos valores si lo deseas */
+      }
+      .tutorial-container {
+        width: 85%;
+        margin: 20px auto;
+        padding: 20px;
+      }
+      .section {
+        background-color: #fff;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+      .section-title {
+        background-color: #007bff;
+        color: #fff;
+        padding: 15px;
+        cursor: pointer;
+        font-size: 1.3rem;
+        font-weight: 600;
+        transition: background-color 0.3s;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .section-title:hover {
+        background-color: #0056b3;
+      }
+      .section-title .close-btn {
+        background-color: transparent;
+        border: none;
+        color: #fff;
+        font-size: 20px;
+        cursor: pointer;
+        transition: color 0.3s;
+      }
+      .section-title .close-btn:hover {
+        color: #ff0000;
+      }
+      .section-content {
+        display: none;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-top: 2px solid #ddd;
+      }
+      .section-content p {
+        font-size: 1rem;
+        color: #333;
+      }
+      .video-container {
+        margin-top: 20px;
+        padding-top: 10px;
+      }
+      .video-container iframe {
+        width: 100%;
+        height: 315px;
+        border-radius: 8px;
+      }
+      .footer {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 15px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Estilos para el botón flotante */
+      .floating-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #e51521;
+        color: white;
+        padding: 15px;
+        border-radius: 50%;
+        font-size: 18px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        display: none; /* Oculto inicialmente */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <svg
+        id="Capa_1"
+        data-name="Capa 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 415.46 592.68"
+      >
+        <defs>
+          <style>
+            .cls-1 {
+              fill: #e51521;
+            }
+            .cls-2 {
+              fill: #020202;
+            }
+            .cls-3 {
+              fill: #030303;
+            }
+            .cls-4 {
+              fill: #a0c527;
+            }
+          </style>
+        </defs>
+        <path
+          class="cls-4"
+          d="M267.2.11c48.44-3.04,73.3,57.84,37.34,89.95-21.36,14.39-41.88,30.13-63.3,44.41-9.43,6.29-17.98,9.61-28.82,3.45-17.7-10.05-10.5-27.21-6.7-42.6,5.1-20.68,10.52-41.3,15.91-61.91C229.13,14.1,246.4,1.42,267.2.11ZM267.91,24.96c-10.54,1.19-16.77,8.08-19.7,17.76-5.11,16.87-7.92,34.99-12.92,51.97-.26,2.77,3.15,5.05,5.51,3.32l45.16-31.56c18.03-15.43,6-44.2-18.06-41.48Z"
+        />
+        <path
+          class="cls-1"
+          d="M208.85,180.25c140.07-.67,239.53,135.97,196.46,269.67-41.96,130.24-197.27,184.65-311.18,106.81-12.89-8.81-24.26-17.67-23.15-35.2,15.12-54.21,29.65-108.72,45.48-162.75,2.01-6.87,3.76-13.78,6.68-20.34,24.89-55.96,103.2-58.72,131.71-4.45,3.24,6.16,4.45,14.3,12.69,15.41,3.88.52,8.12.33,12.1.87,42.27,5.71,69.98,47.01,60.92,88.58-10.52,48.28-61.29,57.58-97.9,80.05-24.6,9.19-40.55-23.91-18.49-37.96,18.37-9.61,38.36-17.44,56.43-27.49,8.46-4.7,15.74-10.13,19.51-19.4,10.71-26.35-16.02-52.25-42.09-41.38-3.12,1.3-5.85,3.6-9.03,4.66-10.75,3.6-22.54-1.69-26.13-12.6-1.85-5.62-.24-10.3-.62-15.95-2.5-36.69-52.81-41.84-63.12-7.3-10.51,45.38-26.75,90.1-37.62,135.3-5.94,24.7,8.99,32.79,28.98,40.7,120.98,47.85,245.31-59.73,217.52-186.25-25.62-116.67-165.57-166.63-259.38-91.43-7.43,5.95-13.19,12.86-19.99,19.27-17.87,16.86-45.21-1.92-36.09-23.85,2.26-5.43,12.23-14.92,16.8-19.22,37.5-35.27,87.73-55.48,139.5-55.73Z"
+        />
+        <path
+          class="cls-2"
+          d="M24.16,396.68c.36,1.45,2.09,1.95,3.04,3.26,2.9,4.02.88,7.6-1.96,10.78,1.25-.03,2.52.06,3.78,0,3.42-.17,7.55-1.47,10.75.06,5.52,2.64,4.44,11.64-1.83,12.83-3.86.73-9.5.83-13.61,1.16-4.44.36-11.33,1.27-15.49,1.11s-7.05-3.62-6.66-7.77,7.67-9.36,9.7-13.28c-2.53-3.31-11.1-8.03-11.77-12.02-.73-4.32,2.03-7.72,6.25-8.34,9.02-1.32,18.99-.76,28.09-2.16,5.64.43,9.02,6.42,5.37,11.14-3.12,4.04-11.03,2.67-15.67,3.24Z"
+        />
+        <path
+          class="cls-2"
+          d="M49.39,304.43c.52.45,4.22-1.25,5.23-1.39,6.1-.81,10.26,5.06,7.06,10.31-2.35,3.85-10.75,4.91-14.84,6.6.04.32-.1.83.04,1.04.11.18,3.16,1.33,3.82,1.77,4.36,2.9,3.98,9.68-.83,11.92-2.4,1.12-3.9.72-6.26-.15-8.34-3.06-17.11-8.96-25.47-12.36-2.47-1.53-3.42-4.49-2.83-7.3.94-4.48,7.02-14.9,10.64-17.82,8.1-6.53,20.77-2.67,23.44,7.37ZM34.24,315.62c.68-1.86,5.27-10.04,1.25-10.46-2.7-.28-5.02,5.74-5.93,7.77.02.96,3.7,2.36,4.68,2.69Z"
+        />
+        <path
+          class="cls-2"
+          d="M37.41,449.39c8.77-.76,15.58,4.55,19.71,11.77,3.31,5.79,7.79,12.49.41,17-5.53,3.39-18.53,10.08-24.49,12.25-3.31,1.21-6.52.73-8.68-2.25-10.7-14.74-7.8-36.98,13.05-38.78ZM45.77,469.09c-4.1-11.75-18.41-4.72-12.96,6.13l12.96-6.13Z"
+        />
+        <path
+          class="cls-3"
+          d="M36.47,352.79l-1.8,8.73c2.93,3,8.62,4.89,8.61,9.76-.01,6.09-6.51,9.21-11.31,5.52-7.39-6.61-16.95-12.08-24.18-18.68-4.42-4.03-3.51-9.83,1.98-12.05,9.81-1.91,20.24-6.53,29.94-8.24,3.77-.67,7.08.22,8.4,4.1,2.75,8.11-5.78,9.68-11.63,10.86ZM27.4,351.64c-1.38.21-6.83,1.27-7.15,2.42-.15.43-.06.79.13,1.18.26.56,5.41,4.49,5.94,3.97l1.08-7.57Z"
+        />
+        <path
+          class="cls-3"
+          d="M39.92,427.76c6.95-.27,9.61,9.08,3.82,12.82l-29.94,8.6c-7.11-.15-9.64-8.79-3.82-12.82l29.94-8.6Z"
+        />
+      </svg>
+      <h1>Tutorial Interactivo - Industrias Dimar</h1>
+    </div>
+
+    <div class="tutorial-container">
+      <div class="section-list">
+        <!-- Secciones Dinámicas -->
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>&copy; 2024 Industrias Dimar. Todos los derechos reservados.</p>
+    </div>
+
+    <button
+      class="floating-btn"
+      id="closeAllButton"
+      onclick="closeAllSections()"
+    >
+      X
+    </button>
+
+    <script>
+      // Datos de las secciones
+      const sections = [
+        {
+          title: "Sección 1: Introducción",
+          description:
+            "En esta sección, aprenderemos los conceptos básicos sobre HTML, cómo estructurar una página web y las etiquetas principales.",
+          videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        },
+        {
+          title: "Sección 2: CSS Básico",
+          description:
+            "Aquí veremos cómo darle estilo a nuestras páginas web utilizando CSS, incluyendo cómo trabajar con colores, márgenes y fuentes.",
+          videoUrl: "https://www.youtube.com/embed/1Rs2ND1ryYc",
+        },
+        {
+          title: "Sección 3: JavaScript para Principiantes",
+          description:
+            "En esta sección, exploraremos los fundamentos de JavaScript, cómo hacer que nuestra página interactúe con el usuario y cómo manipular elementos del DOM.",
+          videoUrl: "https://www.youtube.com/embed/W6NZfCO5SIk",
+        },
+      ];
+
+      // Generar las secciones dinámicamente
+      const sectionList = document.querySelector(".section-list");
+
+      sections.forEach((section) => {
+        const sectionElement = document.createElement("div");
+        sectionElement.classList.add("section");
+
+        sectionElement.innerHTML = `
+          <div class="section-title" onclick="toggleSection(this)">
+            ${section.title}
+           
+          </div>
+          <div class="section-content">
+            <p>${section.description}</p>
+            <div class="video-container">
+              <iframe
+                src="${section.videoUrl}"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+        `;
+        sectionList.appendChild(sectionElement);
+      });
+
+      function toggleSection(section) {
+        const content = section.nextElementSibling;
+        const closeButton = document.getElementById("closeAllButton");
+
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+          closeButton.style.display = "block"; // Mostrar el botón flotante cuando se abre una sección
+        }
+      }
+
+      function closeSection(event, button) {
+        event.stopPropagation(); // Evitar que el clic en el botón "X" cierre la sección automáticamente.
+        const section = button.closest(".section");
+        const content = section.querySelector(".section-content");
+        content.style.display = "none";
+        document.getElementById("closeAllButton").style.display = "none"; // Ocultar el botón flotante si no hay secciones abiertas.
+      }
+
+      function closeAllSections() {
+        const sections = document.querySelectorAll(".section-content");
+        const closeButton = document.getElementById("closeAllButton");
+
+        sections.forEach((section) => {
+          section.style.display = "none";
+        });
+        closeButton.style.display = "none"; // Ocultar el botón flotante después de cerrar todas las secciones
+      }
+    </script>
+  </body>
+</html>
